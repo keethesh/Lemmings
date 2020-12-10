@@ -10,7 +10,7 @@ class Case:
             return True
     
     def depart(self):
-        entree=
+        pass
     
     def arrivee(self,lem):
         pass
