@@ -19,6 +19,7 @@ class Jeu:
                        ' ': Fore.WHITE,
                        '>': Fore.GREEN,
                        '<': Fore.GREEN}
+
         with open('grotte.txt') as f:
             grilles = f.read().split('.')
 
@@ -54,8 +55,12 @@ class Jeu:
 
     def demarre(self):
         with self.__terminal.cbreak():
+            self.afficher()
             val = ''
             while val.lower() != 'q':
+                print('[1] Pour ajouter un lemming\n'
+                      '[Entrer] Pour faire passer un tour\n'
+                      '[q] Pour quitter\n')
                 val = self.__terminal.inkey()
                 if str(val) == '1':
                     self.tour()
@@ -63,7 +68,7 @@ class Jeu:
                     self.grotte[self.get_entree()[1]][self.get_entree()[0]].arrivee(Lemming(self))
                     self.afficher()
 
-                elif str(val) == '\r':
+                elif val.name == 'KEY_ENTER':
                     self.tour()
                     self.afficher()
 
@@ -122,6 +127,6 @@ class Case:
         return self.terrain if self.est_libre() else str(self.lemming)
 
 
-j = Jeu()
-e = Lemming(j)
-j.demarre()
+if __name__ == '__main__':
+    j = Jeu()
+    j.demarre()
